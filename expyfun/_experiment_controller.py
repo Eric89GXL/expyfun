@@ -23,7 +23,7 @@ from ._utils import (get_config, verbose_dec, _check_pyglet_version,
                      running_rms, _sanitize, logger, ZeroClock, date_str,
                      check_units, set_log_file, flush_logger, _TempDir,
                      string_types, _fix_audio_dims, input, _get_args,
-                     _get_display, _wait_secs)
+                     _get_display, _wait_secs, _QUIT_KEY_PRESSED)
 from ._tdt_controller import TDTController
 from ._trigger_controllers import ParallelTrigger
 from ._sound_controllers import (SoundPlayer, SoundCardController,
@@ -2121,6 +2121,9 @@ class ExperimentController(object):
             except Exception:
                 tb.print_exc()
         if any([x is not None for x in (err_type, value, traceback)]):
+            if value is _QUIT_KEY_PRESSED:
+                logger.error('Expyfun: %s' % (value,))
+                return True
             return False
         return True
 

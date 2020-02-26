@@ -12,7 +12,7 @@ from functools import partial
 
 from .visual import (Triangle, Rectangle, Circle, Diamond, ConcentricCircles,
                      FixationDot)
-from ._utils import clock, string_types, logger
+from ._utils import clock, string_types, logger, _QUIT_KEY_PRESSED
 
 
 class Keyboard(object):
@@ -231,7 +231,7 @@ class Keyboard(object):
                                 ' list of strings, not a {}.'
                                 ''.format(type(keys)))
         if len(keys):
-            raise RuntimeError('Quit key pressed')
+            raise _QUIT_KEY_PRESSED
 
     def _correct_presses(self, events, timestamp, relative_to, kind='presses'):
         """Correct timing of presses and check for quit press."""

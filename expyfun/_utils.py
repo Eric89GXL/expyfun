@@ -40,6 +40,16 @@ except Exception:
     pass
 
 
+class QuitKeyException(RuntimeError):
+    """Exception for a quit key press."""
+
+    def __init__(self):
+        return super(QuitKeyException, self).__init__('Quit key pressed')
+
+
+_QUIT_KEY_PRESSED = QuitKeyException()
+
+
 # for py3k (eventually)
 if sys.version.startswith('2'):
     string_types = basestring  # noqa
